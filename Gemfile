@@ -18,3 +18,14 @@ gem "launchy", ">= 2.0.5", :group => :test
 gem "devise", ">= 1.4.4"
 gem "frontend-helpers"
 gem "rails-footnotes", ">= 3.7", :group => :development
+
+# deployment
+gem 'capistrano', :group => :development
+gem 'capistrano-ext', :group => :development
+
+group :test do
+  #gem "capybara-webkit"
+  gem "ZenTest", ">= 4.4.2"
+  gem "autotest-rails", ">= 4.1.0"
+  gem "autotest-growl"
+end
