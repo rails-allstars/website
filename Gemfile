@@ -25,6 +25,7 @@ gem 'capistrano-ext', :group => :development
 
 group :test do
   #gem "capybara-webkit"
+  gem "shoulda-matchers"
   gem "ZenTest", ">= 4.4.2"
   gem "autotest-rails", ">= 4.1.0"
   gem "autotest-growl"
