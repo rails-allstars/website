@@ -1,5 +1,6 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+require "bundler/capistrano"
 
 # BASE APP CONFIG
 # ===============
@@ -28,14 +29,11 @@ set :ssh_options, {:forward_agent => true}
 role :app, serveraddr, :primary => true
 role :web, serveraddr, :primary => true
 role :db, serveraddr, :primary => true
+set :normalize_asset_timestamps, false
 
 
-
-after "deploy:symlink", "bundler:install"
-namespace :bundler do
-  task :install do
-    run("export RAILS_ENV=#{rails_env} && cd #{current_path} && bundle install --deployment  --without test ")
-  end
+after 'deploy:update_code' do
+  run "cd #{deploy_to}/current && RAILS_ENV=#{rails_env} rake assets:precompile"
 end
 
 
