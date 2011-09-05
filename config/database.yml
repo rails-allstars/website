@@ -26,3 +26,15 @@ production:
 
 cucumber:
   <<: *test
+  
+  
+# CREATE USER 'ras_staging'@'localhost' IDENTIFIED BY 'auq717azfatgjquqza6a7a77g7g';
+# CREATE DATABASE `ras_staging` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+# GRANT ALL ON `ras_staging`.* TO 'ras_staging'@'localhost';
+staging:
+  adapter: mysql
+  username: ras_staging
+  password: auq717azfatgjquqza6a7a77g7g
+  database: ras_staging
+  pool: 2
+  timeout: 5000
