@@ -1,3 +1,18 @@
-%h3 Home
-- @users.each do |user|
-  %p User: #{link_to user.name, user}
+%h3 Rails Allstars
+%p Wir sind die Rails Elite in Schleswig-Holstein.
+
+%h4 Nächstes Meetup
+
+- if @next_event
+  %p
+    %strong= @next_event.title
+    =@next_event.start_time
+- else
+  %p Kein nächstes Meetup vorhanden, <a href="">was ist da denn los?</a>
+
+
+- unless @previous.empty?
+  %h4 Vergangene Meetups
+  %ul
+    - @previous.each do |event|
+      %li= event.title
