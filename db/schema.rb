@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110905202222) do
+ActiveRecord::Schema.define(:version => 20110905205013) do
 
   create_table "attendances", :force => true do |t|
     t.string   "status"
@@ -56,6 +56,11 @@ ActiveRecord::Schema.define(:version => 20110905202222) do
 
   add_index "posts", ["event_id"], :name => "index_posts_on_event_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "posts_tags", :id => false, :force => true do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
 
   create_table "tags", :force => true do |t|
     t.string   "name"
