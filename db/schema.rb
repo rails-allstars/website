@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(:version => 20110905202222) do
   add_index "attendances", ["event_id"], :name => "index_attendances_on_event_id"
   add_index "attendances", ["user_id"], :name => "index_attendances_on_user_id"
 
+  create_table "events", :force => true do |t|
+    t.datetime "start_time"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "organizer_id"
+  end
+
+  add_index "events", ["location_id"], :name => "index_events_on_location_id"
+
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.string   "address"
