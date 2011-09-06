@@ -6,13 +6,21 @@
 - if @next_event
   %p
     %strong= @next_event.title
-    =@next_event.start_time
+    =l @next_event.start_time, :format => :short
+    - if current_user
+      - rsvp = @next_event.rsvp_of(current_user)
+      - unless rsvp.yes?
+        =link_to 'Teilnehmen', attendances_create_path(:event_id => @next_event, :status => 'yes')
+      - unless rsvp.no?
+        =link_to 'Absagen', attendances_create_path(:event_id => @next_event, :status => 'no')
+      - unless rsvp.maybe?
+        =link_to 'Vielleicht', attendances_create_path(:event_id => @next_event, :status => 'maybe')
 - else
   %p Kein nächstes Meetup vorhanden, <a href="">was ist da denn los?</a>
-
 
 - unless @previous.empty?
   %h4 Vergangene Meetups
   %ul
     - @previous.each do |event|
       %li= event.title
+

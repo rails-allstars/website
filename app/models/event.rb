@@ -6,4 +6,13 @@ class Event < ActiveRecord::Base
   scope :previous, lambda { where('start_time <= ?', Time.now.at_midnight).order('start_time DESC') }
   scope :upcoming, lambda { where('start_time > ?', Time.now.at_midnight).order('start_time ASC') }
 
+  def rsvp(user, status)
+    a = attendances.find_or_create_by_user_id user, { :status => 'maybe' }
+    a.update_attributes :status => status
+  end
+
+  def rsvp_of(user)
+    attendances.find_by_user_id(user.id).try(:status).to_s.inquiry
+  end
+
 end

@@ -1,4 +1,6 @@
 RailsAllstars::Application.routes.draw do
+  get "attendances/create"
+
   resources :events
 
   #get \"users\/show\"
